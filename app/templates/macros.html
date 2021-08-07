@@ -1,0 +1,10 @@
+{% macro displaySourceList(source_list) %}
+    {% for source in source_list %}
+    <!-- Source(id, name, description, url, category, language, country) -->
+        <a href="">
+            <h1>{{source.name}}</h1>
+        </a>
+        <p>{{source.description}}</p>
+        <p>{{source.category}}</p>
+    {% endfor%}
+{% endmacro%}

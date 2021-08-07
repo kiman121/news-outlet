@@ -8,7 +8,7 @@ class Config:
     https://newsapi.org/v2/top-headlines/sources?apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
     
     '''
-    NEWS_API_BASE_URL = 'https://newsapi.org/v2/{}'
+    NEWS_API_BASE_URL = 'https://newsapi.org/v2/{}apiKey={}'
     NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
     SECRET_KEY = os.environ.get('SECRET_KEY')
 

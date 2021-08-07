@@ -13,3 +13,48 @@ def configure_request(app):
     global api_key, base_url
     api_key = app.config['NEWS_API_KEY']
     base_url = app.config['NEWS_API_BASE_URL']
+
+def get_sources():
+    '''
+    Function that gets the news sources json response to the url request
+    https://newsapi.org/v2/  top-headlines/sources?apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
+    '''
+    query_string = 'top-headlines/sources'
+    get_sources_url = base_url.format(query_string,api_key)
+
+    with urllib.request.urlopen(get_sources_url) as url:
+        get_sources_data = url.read()
+        get_sources_response = json.loads(get_sources_data)
+
+        source_results = None
+
+        if get_sources_response['sources']:
+            source_results_list = get_sources_response['sources']
+            source_results =process_results(source_results_list)
+        
+    return source_results
+
+def process_results(source_list):
+    '''
+    Function that processes the source result and transforms to a list of Objects
+    Args:
+        source_list: A list of dictionaries that contain source details
+    Returns:
+        source_results: A list of source objects
+    '''
+    source_results = []
+
+    for source_item in source_list:
+        id = source_item.id
+        name = source_item.name
+        description = source_item.description
+        url = source_item.url
+        category = source_item.category
+        language = source_item.language
+        country = source_item.country
+
+        if id:
+            source_object = Source(id, name, description, url, category, language, country)
+            source_results.append(source_object)
+    
+    return source_results

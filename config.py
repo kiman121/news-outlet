@@ -3,9 +3,8 @@ import os
 class Config:
     '''
     Class that has the general application configurations
-    https://newsapi.org/v2/everything?q=bitcoin&apiKey=API_KEY
-    https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
-    https://newsapi.org/v2/top-headlines/sources?apiKey=API_KEY
+    https://newsapi.org/v2/everything?q=bitcoin&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
+    https://newsapi.org/v2/top-headlines?country=us&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
     https://newsapi.org/v2/top-headlines/sources?apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
     
     '''

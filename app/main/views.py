@@ -3,13 +3,14 @@ from . import main
 from ..requests import get_sources
 from ..models import Source, Article
 
+
 @main.route('/')
 def index():
     '''
     Function that returns the index page and its data
     '''
-    # Fecth sources
+    # Fetch sources
     news_sources = get_sources()
     title = 'Home - Welcome to the best News stream'
 
-    return render_template('index.html', title = title, sources=news_sources)
+    return render_template('index.html', title=title, sources=news_sources)

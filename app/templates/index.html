@@ -1,13 +1,13 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 <!-- Styles block -->
 
 
 <!-- Block content -->
-{{%block content%}}
+{% block content %}
     <ul>
         {{macro.displaySourceList(sources)}}
     </ul>
-{%endblock%}
+{% endblock %}
 
 

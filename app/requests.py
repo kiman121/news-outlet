@@ -22,9 +22,8 @@ def get_sources():
     Function that gets the news sources json response to the url request
     https://newsapi.org/v2/top-headlines/sources?apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
     '''
-    query_string = 'top-headlines/sources'
-    get_sources_url = base_url.format(query_string, api_key)
-    # get_sources_url ='https://newsapi.org/v2/top-headlines/sources?apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d'
+    page_resource = 'top-headlines/sources?apiKey={}'.format(api_key)
+    get_sources_url = base_url.format(page_resource)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -34,12 +33,12 @@ def get_sources():
 
         if get_sources_response['sources']:
             source_results_list = get_sources_response['sources']
-            source_results = process_results(source_results_list)
+            source_results = process_sources(source_results_list)
 
     return source_results
 
 
-def process_results(source_list):
+def process_sources(source_list):
     '''
     Function that processes the source result and transforms to a list of Objects
     Args:
@@ -64,3 +63,51 @@ def process_results(source_list):
             source_results.append(source_object)
 
     return source_results
+
+
+def get_articles(source_id):
+    '''
+    Function that gets news articles for a selected sources
+    https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
+    '''
+    page_resource = 'top-headlines?sources={}&apiKey={}'.format(
+        source_id, api_key)
+    get_articles_url = base_url.format(page_resource)
+
+    with urllib.request.urlopen(get_articles_url) as url:
+        get_articles_data = url.read()
+        get_articles_response = json.loads(get_articles_data)
+
+        articles_result = None
+
+        if get_articles_response['articles']:
+            articles_result_list = get_articles_response['articles']
+            articles_result = process_articles(articles_result_list)
+
+    return articles_result
+
+
+def process_articles(articles_list):
+    '''
+    Function that process the articles result and transforms to a list of objects
+    Args:
+        articles_list: A list of dictionaries that contain articles detail
+    Return:
+        articles_result: A list of article objects
+    '''
+    articles_result = []
+
+    for article_item in articles_list:
+        author = article_item.get('author')
+        title = article_item.get('title')
+        description = article_item.get('description')
+        article_url = article_item.get('url')
+        image_url = article_item.get('urlToImage')
+        published_at = article_item.get('publishedAt')
+        content = article_item.get('content')
+
+        if author:
+            article_object = Article(author, title, description, article_url, image_url, published_at, content)
+            articles_result.append(article_object)
+
+    return articles_result

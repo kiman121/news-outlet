@@ -1,10 +1,21 @@
 {% macro displaySourceList(source_list) %}
     {% for source in source_list %}
     <!-- Source(id, name, description, url, category, language, country) -->
-        <a href="">
+        <a href="/articles/{{source.id}}">
+            {{source.id}}
             <h1>{{source.name}}</h1>
         </a>
         <p>{{source.description}}</p>
         <p>{{source.category}}</p>
+    {% endfor %}
+{% endmacro %}
+
+{% macro displayArticleList(article_list) %}
+    {% for article in article_list %}
+        <a href="">
+            <h1>{{article.title}}</h1>
+        </a>
+        <p>{{article.description}}</p>
+        <p>{{article.content}}</p>
     {% endfor %}
 {% endmacro %}

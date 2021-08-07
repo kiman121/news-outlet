@@ -29,7 +29,7 @@ class Article:
     Airticle class that defines Article objects
     '''
 
-    def __init__(self, author, title, description, article_url, image_url, published_at, content):
+    def __init__(self,source, author, title, description, article_url, image_url, published_at, content):
         '''
         __init__ method helps in defining properties for the article object.
         Args:
@@ -41,6 +41,7 @@ class Article:
             publishe_at: New article publish at (date)
             content: New article content
         '''
+        self.source = source
         self.author = author
         self.title = title
         self.description = description

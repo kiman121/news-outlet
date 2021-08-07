@@ -5,7 +5,25 @@
 
 <!-- Block content -->
 {% block content %}
-    <ul>
+    <div class="row">
+        <div class="col-md-7">
+            <h1>{{main_article.title}}</h1>
+        </div>
+        <div class="col-md-5">
+            <ul>    
+                {% for article in articles %}
+                    <li>
+                        <a href="/articles?source_id={{article.source}}&article_title={{article.title}}">
+                            <h1>{{article.title}}</h1>
+                        </a>
+                        <p>{{article.description}}</p>
+                        <p>{{article.content}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- <ul>
         {{macro.displayArticleList(articles)}}
-    </ul>
+    </ul> -->
 {% endblock %}

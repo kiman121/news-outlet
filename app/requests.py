@@ -1,6 +1,7 @@
 import urllib.request
 import json
 from .models import Source, Article
+import re
 
 # Global variables
 api_key = None
@@ -20,9 +21,8 @@ def configure_request(app):
 def get_sources():
     '''
     Function that gets the news sources json response to the url request
-    https://newsapi.org/v2/top-headlines/sources?apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
     '''
-    page_resource = 'top-headlines/sources?apiKey={}'.format(api_key)
+    page_resource = f'top-headlines/sources?apiKey={api_key}'
     get_sources_url = base_url.format(page_resource)
 
     with urllib.request.urlopen(get_sources_url) as url:
@@ -68,7 +68,6 @@ def process_sources(source_list):
 def get_article(source_id, article_title):
     '''
     Function that gets the top most article
-    https://newsapi.org/v2/top-headlines?sources=bbc-news&pageSize=1&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
     '''
 
     if article_title != None:
@@ -77,8 +76,7 @@ def get_article(source_id, article_title):
         page_resource = f'top-headlines?sources={source_id}&pageSize=1&apiKey={api_key}'
 
     article_url = base_url.format(page_resource)
-    # article_url='https://newsapi.org/v2/top-headlines?sources=bbc-news&pageSize=1&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d'
-
+    
     with urllib.request.urlopen(article_url) as url:
         get_article_data = url.read()
         get_article_response = json.loads(get_article_data)
@@ -88,6 +86,7 @@ def get_article(source_id, article_title):
         if get_article_response['articles']:
 
             article = get_article_response['articles'][0]
+            # article_description = article.get('description')
 
             source = source_id
             author = article.get('author')
@@ -96,7 +95,7 @@ def get_article(source_id, article_title):
             article_url = article.get('url')
             image_url = article.get('urlToImage')
             published_at = article.get('publishedAt')
-            content = article.get('content')
+            content = re.sub("[\[].*?[\]]","", article.get('content'))
 
             article_result = Article(
                 source, author, title, description, article_url, image_url, published_at, content)

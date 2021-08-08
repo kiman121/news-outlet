@@ -6,22 +6,22 @@
 <!-- Block content -->
 {% block content %}
     <div class="content-wrapper">
-        <div class="row">
-            <div class="col-md-8 main-story">
-                <h1>{{main_article.title}}</h1>
-            </div>
-            <div class="col-md-4 other-stories">
-                <ul>
-                    {% for article in articles %}
-                        <li>
-                            <a href="/articles?source_id={{article.source}}&article_title={{article.title}}">
-                                <img src="{{article.image_url}}" alt="">
-                                <h1>{{article.title|truncate(40)}}</h1>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div class="main-story">
+            <h1>{{main_article.title}}</h1>
+            <div class="author">By <span>{{main_article.author}}</span> For Insta News</div>
+            <div class="published-on"><span class="material-icons">schedule</span>Published on: {{main_article.published_at}}</div>
+            <img src="{{main_article.image_url}}" alt="">
+            <p>{{main_article.content}} <span><a href="{{main_article.article_url}}" target="_blank">read more</a></span></p>
+        </div>
+        <div class="other-stories">
+            {% for article in articles %}
+                <div>
+                    <a href="/articles?source_id={{article.source}}&article_title={{article.title}}">
+                        <img src="{{article.image_url}}" alt="">
+                        <h1>{{article.title|truncate(40)}}</h1>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

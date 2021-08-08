@@ -1,7 +1,6 @@
 from flask import render_template, redirect, url_for, request
 from . import main
 from ..requests import get_sources, get_articles, get_article
-# from ..models import Source, Article
 
 
 @main.route('/')
@@ -25,7 +24,7 @@ def articles():
     source_id = query_string['source_id']
 
     article_title = None
-    
+
     if len(query_string) > 1:
         title_split = query_string['article_title'].split(" ")
         article_title = '+'.join(title_split)

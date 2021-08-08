@@ -5,25 +5,23 @@
 
 <!-- Block content -->
 {% block content %}
-    <div class="row">
-        <div class="col-md-7">
-            <h1>{{main_article.title}}</h1>
-        </div>
-        <div class="col-md-5">
-            <ul>    
-                {% for article in articles %}
-                    <li>
-                        <a href="/articles?source_id={{article.source}}&article_title={{article.title}}">
-                            <h1>{{article.title}}</h1>
-                        </a>
-                        <p>{{article.description}}</p>
-                        <p>{{article.content}}</p>
-                    </li>
-                {% endfor %}
-            </ul>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-8 main-story">
+                <h1>{{main_article.title}}</h1>
+            </div>
+            <div class="col-md-4 other-stories">
+                <ul>
+                    {% for article in articles %}
+                        <li>
+                            <a href="/articles?source_id={{article.source}}&article_title={{article.title}}">
+                                <img src="{{article.image_url}}" alt="">
+                                <h1>{{article.title|truncate(40)}}</h1>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
-    <!-- <ul>
-        {{macro.displayArticleList(articles)}}
-    </ul> -->
 {% endblock %}

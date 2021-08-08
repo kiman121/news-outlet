@@ -108,7 +108,7 @@ def get_articles(source_id):
     '''
     Function that gets news articles for a selected sources
 
-    https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
+    https://newsapi.org/v2/top-headlines?sources=abc-news&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
 
     '''
     page_resource = 'top-headlines?sources={}&apiKey={}'.format(
@@ -148,7 +148,7 @@ def process_articles(articles_list, source_id):
         published_at = article_item.get('publishedAt')
         content = article_item.get('content')
 
-        if author:
+        if image_url != 'null':
             article_object = Article(
                 source, author, title, description, article_url, image_url, published_at, content)
             articles_result.append(article_object)

@@ -5,9 +5,11 @@
 
 <!-- Block content -->
 {% block content %}
-    <ul>
-        {{macro.displaySourceList(sources)}}
-    </ul>
+    <div class="main-wrapper">
+        <div class="main-content">
+            {{macro.displaySourceList(sources)}}
+        </div>
+    </div>
 {% endblock %}
 
 

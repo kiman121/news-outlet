@@ -86,7 +86,6 @@ def get_article(source_id, article_title):
         if get_article_response['articles']:
 
             article = get_article_response['articles'][0]
-            # article_description = article.get('description')
 
             source = source_id
             author = article.get('author')

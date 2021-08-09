@@ -99,13 +99,59 @@ nav a:hover {
   margin: 0 auto;
   padding: 4em 0;
 }
-.main-content{
+.section-title{
+  border-bottom: 3px solid #000;
+  margin-bottom: 0.25em;
+  padding-bottom: 0.25em;
+}
+/* .main-content{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+} */
+.source {
+  width: 100%;
+  font-size: 0.85em;
+  border-bottom: 1px solid #000;
+  margin-bottom: 0.35em;
 }
-.source{
-  width: 30%;
+.source p{
+  padding: 0 0.25em;
+}
+.source-description:hover{
+  color: #f17d00;
+}
+.source a,
+.trending a {
+  text-decoration: none;
+  color: #000;
+}
+.source-name{
+  font-weight: 800;
+}
+.source-name:hover{
+  color: #f17d00;
+}
+.general-category,
+.business-category,
+.entertainment-category,
+.health-category,
+.science-category,
+.sports-category,
+.technology-category {
+  max-height: 200px;
+  overflow: scroll;
+}
+.category-stub{
+  margin-bottom: .25em;
+}
+.category-title{
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding: .5em 0.2em;
+  background: #000;
+  color: #fff;
+  font-weight: 800;
 }
 /* Articles */
 .content-wrapper {
@@ -135,10 +181,11 @@ nav a:hover {
   font-style: italic;
   margin-bottom: 1.5em;
 }
-.main-story img {
+.main-story img,
+.trending img {
   width: 100%;
 }
-.main-story .material-icons {
+.main-story .material-icons, .published-on .material-icons{
   font-size: 0.89em;
 }
 .other-stories {
@@ -255,11 +302,11 @@ nav a:hover {
   }
 }
 
-@media (max-width:800px) {
-  .main-content{
+@media (max-width: 800px) {
+  .main-content {
     display: block;
   }
-  .source{
+  .source {
     width: 100%;
   }
 }

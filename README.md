@@ -27,6 +27,7 @@ No Known bugs
 ## Technology Used
 - HTML
 - CSS
+- Javascript
 - Bootstrap
 - Python
 - Flask

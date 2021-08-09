@@ -1,15 +1,85 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
-<!-- Styles block -->
-
-
 <!-- Block content -->
 {% block content %}
-    <div class="main-wrapper">
-        <div class="main-content">
-            {{macro.displaySourceList(sources)}}
+<div class="main-wrapper">
+    <div class="main-content">
+        <div class="row">
+            <div class="col-md-8 trending">
+                <h1 class="section-title">Trending</h1>
+                {% for trending in trending_articles %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{trending.image_url}}" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            <a href="{{trending.article_url}}">
+                                <!-- <h5>{{trending.source}}</h5> -->
+                                <p>{{trending.author}}</p>
+                                <p>{{trending.content|truncate(100)}}</p>
+                                <div class="published-on"><span class="material-icons">schedule</span>Published on: {{trending.published_at}}</div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor%}
+            </div>
+            <div class="col-md-4">
+                <h1 class="section-title">Categories</h1>
+
+                <div class="category-stub">
+                    <h6 class="category-title">Business</h6>
+                    <div class="business-category">
+                        {{macro.displaySourceList(sources, 'business')}}
+                    </div>
+                </div>
+
+                <div class="category-stub">
+                    <h6 class="category-title">General</h6>
+                    <div class="general-category">
+                        {{macro.displaySourceList(sources, 'general')}}
+                    </div>
+                </div>
+
+                <div class="category-stub">
+                    <h6 class="category-title">Entertainment</h6>
+                    <div class="entertainment-category">
+                    
+                        {{macro.displaySourceList(sources, 'entertainment')}}
+                    </div>
+                </div>
+
+                <div class="category-stub">
+                    <h6 class="category-title">Health</h6>
+                    <div class="health-category">
+                        {{macro.displaySourceList(sources, 'health')}}
+                    </div>
+                </div>
+
+                <div class="category-stub">
+                    <h6 class="category-title">Science</h6>
+                    <div class="science-category">
+                        {{macro.displaySourceList(sources, 'science')}}
+                    </div>
+                </div>
+
+                <div class="category-stub">
+                    <h6 class="category-title">Sports</h6>
+                    <div class="sports-category">
+                        {{macro.displaySourceList(sources, 'sports')}}
+                    </div>
+                </div>
+
+                <div class="category-stub">
+                    <h6 class="category-title">Technology</h6>
+                    <div class="technology-category">
+                        {{macro.displaySourceList(sources, 'technology')}}
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}
 
 

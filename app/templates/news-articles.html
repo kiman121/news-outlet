@@ -15,7 +15,7 @@
         </div>
         <div class="other-stories">
             {% for article in articles %}
-                <div class="articles">
+                <div>
                     <a href="/articles?source_id={{article.source}}&article_title={{article.title}}">
                         <img src="{{article.image_url}}" alt="">
                         <h1>{{article.title|truncate(40)}}</h1>

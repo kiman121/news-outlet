@@ -7,12 +7,14 @@ from ..requests import get_sources, get_articles, get_article
 def index():
     '''
     Function that returns the index page and its data
+          
     '''
     # Fetch sources
-    news_sources = get_sources()
     title = 'Home - Welcome to the best News stream'
+    news_sources = get_sources()
+    trending_articles = get_articles('abc-news')
 
-    return render_template('index.html', title=title, sources=news_sources)
+    return render_template('index.html', title=title, sources = news_sources,trending_articles=trending_articles)
 
 
 @main.route('/articles', methods=['GET'])

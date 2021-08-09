@@ -12,6 +12,8 @@ def configure_request(app):
     '''
     Function that takes application instance and sets configuration values to 
     api_key and base_url variables
+
+    https://newsapi.org/v2/top-headlines/sources?&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
     '''
     global api_key, base_url
     api_key = app.config['NEWS_API_KEY']
@@ -76,7 +78,7 @@ def get_article(source_id, article_title):
         page_resource = f'top-headlines?sources={source_id}&pageSize=1&apiKey={api_key}'
 
     article_url = base_url.format(page_resource)
-    
+
     with urllib.request.urlopen(article_url) as url:
         get_article_data = url.read()
         get_article_response = json.loads(get_article_data)
@@ -94,7 +96,7 @@ def get_article(source_id, article_title):
             article_url = article.get('url')
             image_url = article.get('urlToImage')
             published_at = article.get('publishedAt')
-            content = re.sub("[\[].*?[\]]","", article.get('content'))
+            content = re.sub("[\[].*?[\]]", "", article.get('content'))
 
             article_result = Article(
                 source, author, title, description, article_url, image_url, published_at, content)
@@ -102,15 +104,46 @@ def get_article(source_id, article_title):
     return article_result
 
 
+# def get_trending_articles():
+#     '''
+#     Function that gets the top most article by category
+#     https://newsapi.org/v2/top-headlines?category=business&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
+
+#     https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
+#     top-headlines?sources=bbc-news&apiKey
+#     '''
+
+#     page_resource = f'top-headlines?sources=bbc-news&apiKey={api_key}'
+
+#     get_articles_url = base_url.format(page_resource)
+
+#     with urllib.request.urlopen(get_articles_url) as url:
+#         get_articles_data = url.read()
+#         get_articles_response = json.loads(get_articles_data)
+
+#         articles_result = None
+
+#         if get_articles_response['articles']:
+#             articles_result_list = get_articles_response['articles']
+#             articles_result = process_articles(articles_result_list, 'bbc-news')
+
+#     return articles_result
+
+
 def get_articles(source_id):
     '''
     Function that gets news articles for a selected sources
+    https://newsapi.org/v2/top-headlines/sources?&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
+    https://newsapi.org/v2/top-headlines/sources?&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
+    
 
+    https://newsapi.org/v2/top-headlines?country=us&apiKey
     https://newsapi.org/v2/top-headlines?sources=abc-news&apiKey=70a9b9d3f1624d63b54bf7ddd06b8c4d
 
     '''
-    page_resource = 'top-headlines?sources={}&apiKey={}'.format(
-        source_id, api_key)
+
+    page_resource = f'top-headlines?sources={source_id}&apiKey={api_key}'
+
     get_articles_url = base_url.format(page_resource)
 
     with urllib.request.urlopen(get_articles_url) as url:
